@@ -50,7 +50,7 @@ export default function BarberHome({ barber, appts, greeting, onNavigate, onNewC
             <div className="min-w-0">
               <p className="text-zinc-400 text-sm">{greeting},</p>
               <p className="font-serif text-2xl font-extrabold text-gold leading-tight truncate">{barber.shortName}</p>
-              <p className="text-zinc-300 text-xs mt-0.5">Barbero · Salón Hermanos</p>
+              <p className="text-zinc-300 text-xs mt-0.5">Barbero · Barbería Hermanos</p>
               {barber.reviewCount > 0 && (
                 <p className="flex items-center gap-1 text-xs text-zinc-400 mt-0.5">
                   <Star size={12} className="text-gold fill-gold" /> {barber.rating} ({barber.reviewCount} reseñas)

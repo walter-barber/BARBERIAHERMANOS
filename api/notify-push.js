@@ -125,7 +125,7 @@ export default async function handler(req, res) {
     if (!endpoint.startsWith('https://')) return res.status(400).json({ error: 'endpoint inválido' });
     const barber = req.body?.barber === true;
     const result = await sendAll({
-      title: '💈 Salón Hermanos',
+      title: '💈 Barbería Hermanos',
       body: barber ? 'Listo: te avisaremos aquí cuando te agenden una cita.' : 'Listo: los avisos de reservas llegarán a este teléfono.',
       url: barber ? '/barber' : '/admin',
       tag: 'prueba',

@@ -80,14 +80,14 @@ export default function AdminLayout({ activeTab, onTabChange, onLogout, children
         <div className="flex items-center gap-3">
           <img
             src="/logo-salon-hermanos.png"
-            alt="Salón Hermanos"
+            alt="Barbería Hermanos"
             width={900}
             height={594}
             className="w-16 h-auto object-contain"
           />
           <div>
             <div className="flex flex-col leading-none">
-              <span className="font-script text-lg text-gold-300">Salón</span>
+              <span className="font-script text-lg text-gold-300">Barbería</span>
               <span className="font-display text-base tracking-wide text-white uppercase">Hermanos</span>
             </div>
             <p className="text-zinc-500 text-[10px] font-mono tracking-wider uppercase mt-1">Panel Admin</p>

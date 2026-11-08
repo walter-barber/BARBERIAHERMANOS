@@ -1,7 +1,7 @@
 {
-  "name": "Panel Salón Hermanos",
+  "name": "Panel Barbería Hermanos",
   "short_name": "Panel Hermanos",
-  "description": "Panel de administración de Salón Hermanos: reservas, pagos y avisos.",
+  "description": "Panel de administración de Barbería Hermanos: reservas, pagos y avisos.",
   "start_url": "/admin",
   "scope": "/",
   "display": "standalone",

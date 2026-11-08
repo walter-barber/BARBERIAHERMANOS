@@ -160,7 +160,7 @@ export default function WhatsAppChat({ onBooking }: Props) {
       {open && (
         <div
           role="dialog"
-          aria-label="Chat con Salón Hermanos"
+          aria-label="Chat con Barbería Hermanos"
           className="w-[calc(100vw-2.5rem)] max-w-sm rounded-2xl overflow-hidden border border-gold/30 shadow-2xl bg-[#111] flex flex-col animate-slide-up"
           style={{ height: 'min(600px, calc(100vh - 7rem))' }}
         >

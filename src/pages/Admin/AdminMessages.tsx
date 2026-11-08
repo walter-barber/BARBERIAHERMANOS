@@ -9,7 +9,7 @@ function formatPhone(phone: string): string {
 }
 
 function replyLink(m: ContactMessage): string {
-  const text = `Hola ${m.name.split(' ')[0]}, te escribimos de Salón Hermanos por tu mensaje: "${m.message.slice(0, 120)}"`;
+  const text = `Hola ${m.name.split(' ')[0]}, te escribimos de Barbería Hermanos por tu mensaje: "${m.message.slice(0, 120)}"`;
   return `https://wa.me/57${m.phone}?text=${encodeURIComponent(text)}`;
 }
 

@@ -90,12 +90,12 @@ export default function MobileHome({ greeting, barbers, clientsCount, todayCount
         <div className="p-5">
           <div className="flex items-center gap-4">
             <div className="w-20 h-20 rounded-full bg-[#111] border-2 border-gold/60 flex items-center justify-center shrink-0 overflow-hidden keep-dark">
-              <img src="/logo-salon-hermanos.png" alt="Salón Hermanos" className="w-16 h-auto object-contain" />
+              <img src="/logo-salon-hermanos.png" alt="Barbería Hermanos" className="w-16 h-auto object-contain" />
             </div>
             <div className="min-w-0">
               <p className="text-zinc-400 text-sm">{greeting},</p>
               <p className="font-serif text-2xl font-extrabold text-gold leading-tight">{name}</p>
-              <p className="text-zinc-300 text-xs mt-0.5">Administrador · Salón Hermanos</p>
+              <p className="text-zinc-300 text-xs mt-0.5">Administrador · Barbería Hermanos</p>
               {email && <p className="text-zinc-500 text-xs truncate">{email}</p>}
             </div>
           </div>

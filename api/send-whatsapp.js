@@ -7,7 +7,7 @@
 // Variables de entorno en Vercel:
 //   VITE_SUPABASE_URL (o APP_SUPABASE_URL), APP_SUPABASE_SERVICE_ROLE_KEY (llave service_role de ese proyecto)
 //   TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_WHATSAPP_FROM, TWILIO_WHATSAPP_TO
-//   TWILIO_TEMPLATE_CLIENT, TWILIO_TEMPLATE_OWNER (SIDs «HX...» de las plantillas aprobadas de Salón Hermanos)
+//   TWILIO_TEMPLATE_CLIENT, TWILIO_TEMPLATE_OWNER (SIDs «HX...» de las plantillas aprobadas de Barbería Hermanos)
 
 const MAX_AGE_MS = 15 * 60 * 1000;
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

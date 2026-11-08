@@ -5,8 +5,8 @@ import BookingCTA from '../components/landing/BookingCTA';
 
 export default function GalleryPage() {
   usePageMeta({
-    title: 'Galería de cortes y barbas | Salón Hermanos Valledupar',
-    description: 'Mira nuestros trabajos: degradados, cortes clásicos, barba y cejas en Salón Hermanos, Valledupar.',
+    title: 'Galería de cortes y barbas | Barbería Hermanos Valledupar',
+    description: 'Mira nuestros trabajos: degradados, cortes clásicos, barba y cejas en Barbería Hermanos, Valledupar.',
   });
   return (
     <PublicLayout>

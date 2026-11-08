@@ -187,7 +187,7 @@ export default function DepositStep({ bookingIds, amount, total, expiresAt, clie
           </div>
           <label className="flex items-start gap-3 cursor-pointer rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-3">
             <input type="checkbox" checked={accepted} onChange={(e) => { setAccepted(e.target.checked); setError(''); }} className="mt-0.5 w-5 h-5 accent-yellow-500 shrink-0" />
-            <span className="text-[13px] text-zinc-200">Me comprometo a asistir puntualmente a mi cita en Salón Hermanos.</span>
+            <span className="text-[13px] text-zinc-200">Me comprometo a asistir puntualmente a mi cita en Barbería Hermanos.</span>
           </label>
           {error && <p className="text-sm text-rose-300">{error}</p>}
           <button onClick={sendSalon} disabled={sending || !accepted} className="btn-gold w-full min-h-[48px] py-3 rounded-full text-base font-bold disabled:opacity-60 shadow-gold">

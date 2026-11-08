@@ -79,7 +79,7 @@ export default function ReviewPage() {
           <div className="w-14 h-14 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center mx-auto mb-4">
             <ClipperIcon size={26} className="text-black" />
           </div>
-          <h1 className="font-serif text-3xl font-bold text-white mb-2">Salón Hermanos</h1>
+          <h1 className="font-serif text-3xl font-bold text-white mb-2">Barbería Hermanos</h1>
           <p className="text-zinc-400">¿Qué tal te pareció nuestro servicio?</p>
         </div>
 

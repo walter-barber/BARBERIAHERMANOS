@@ -30,7 +30,7 @@ function tabFromUrl(): AdminTab {
 }
 
 export default function AdminPage() {
-  usePageMeta({ title: 'Panel de administración | Salón Hermanos', noindex: true });
+  usePageMeta({ title: 'Panel de administración | Barbería Hermanos', noindex: true });
   const [loggedIn, setLoggedIn] = useState(false);
   const [checkingSession, setCheckingSession] = useState(true);
   const [activeTab, setActiveTab] = useState<AdminTab>(tabFromUrl);

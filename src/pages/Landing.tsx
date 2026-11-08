@@ -16,9 +16,9 @@ interface LandingProps {
 export default function LandingPage({ autoOpenBooking }: LandingProps = {}) {
   usePageMeta({
     title: autoOpenBooking
-      ? 'Reservar Cita | Salón Hermanos — Club de Caballeros'
-      : 'Salón Hermanos | Barbería tradicional en Valledupar — Club de Caballeros',
-    description: 'Salón Hermanos, barbería tradicional en Valledupar (barrio Tobías Daza). Corte caballero, niño y dama, degradado, barba, cejas y keratina. Reserva tu cita en línea.',
+      ? 'Reservar Cita | Barbería Hermanos — Club de Caballeros'
+      : 'Barbería Hermanos | Barbería tradicional en Valledupar — Club de Caballeros',
+    description: 'Barbería Hermanos, barbería tradicional en Valledupar (barrio Tobías Daza). Corte caballero, niño y dama, degradado, barba, cejas y keratina. Reserva tu cita en línea.',
   });
   return (
     <PublicLayout initialBookingOpen={autoOpenBooking}>

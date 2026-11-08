@@ -105,7 +105,7 @@ export async function uploadGalleryPhoto(file: File, category: string, alt: stri
   const { error: uploadError } = await supabase.storage.from(BUCKET).upload(path, image, { contentType: 'image/jpeg', upsert: false });
   if (uploadError) throw uploadError;
   const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
-  const item: GalleryItem = { id, url: data.publicUrl, category, alt: alt || `Trabajo de ${category.toLowerCase()} en Salón Hermanos` };
+  const item: GalleryItem = { id, url: data.publicUrl, category, alt: alt || `Trabajo de ${category.toLowerCase()} en Barbería Hermanos` };
   const { error } = await supabase.from('gallery').insert(item);
   if (error) {
     await supabase.storage.from(BUCKET).remove([path]);

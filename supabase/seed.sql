@@ -1,5 +1,5 @@
 -- =====================================================================
---  SALÓN HERMANOS — DATOS INICIALES DE LA BASE LOCAL (pruebas)
+--  BARBERÍA HERMANOS — DATOS INICIALES DE LA BASE LOCAL (pruebas)
 --  Se ejecuta solo en local con `npx supabase start` / `npx supabase db reset`.
 --  Nunca se aplica al Supabase real con `db push`.
 -- =====================================================================
@@ -56,14 +56,14 @@ INSERT INTO business_settings (id, data) VALUES (true, '{
 -- Equipo. Los PIN son solo de prueba local (Walter 1111, Nelson 2222, Gerardo 3333);
 -- cada barbero lo cambia desde su portal.
 INSERT INTO barbers (name, short_name, role, phone, bio, specialties, rating, review_count, available, pin, commission, avatar) VALUES
-  ('Walter Manjarrez', 'Walter', 'barbero', '', 'Barbero y fundador de Salón Hermanos.',
+  ('Walter Manjarrez', 'Walter', 'barbero', '', 'Barbero y fundador de Barbería Hermanos.',
    '["Corte caballero","Degradado","Barba","Cejas"]', 5, 0, true, '1111', 100, 'WM'),
-  ('Nelson Márquez', 'Nelson', 'barbero', '', 'Barbero de Salón Hermanos.',
+  ('Nelson Márquez', 'Nelson', 'barbero', '', 'Barbero de Barbería Hermanos.',
    '["Corte caballero","Degradado","Barba","Cejas"]', 5, 0, true, '2222', 77, 'NM'),
-  ('Gerardo Reinero', 'Gerardo', 'barbero', '', 'Barbero de Salón Hermanos.',
+  ('Gerardo Reinero', 'Gerardo', 'barbero', '', 'Barbero de Barbería Hermanos.',
    '["Corte caballero","Degradado","Barba","Cejas"]', 5, 0, true, '3333', 78, 'GR');
 
--- Servicios y precios de Salón Hermanos (duraciones provisionales: se ajustan en Panel → Servicios)
+-- Servicios y precios de Barbería Hermanos (duraciones provisionales: se ajustan en Panel → Servicios)
 INSERT INTO services (name, category, duration, price, description, popular) VALUES
   ('Corte caballero', 'cortes', 30, 15000, 'Corte clásico o moderno a tu gusto.', true),
   ('Corte de niño', 'cortes', 30, 15000, 'Corte para los más pequeños de la casa.', false),

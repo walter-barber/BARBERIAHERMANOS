@@ -29,8 +29,8 @@ export default function BookingCTA({ onBooking }: BookingCTAProps) {
           </div>
 
           <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold text-ivory mb-4">
-            Tu silla te espera en el{' '}
-            <span className="font-script font-normal text-gold">Salón</span>
+            Tu silla te espera en la{' '}
+            <span className="font-script font-normal text-gold">Barbería</span>
           </h2>
 
           <p className="text-zinc-400 text-lg max-w-2xl mx-auto mb-10">

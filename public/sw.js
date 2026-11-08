@@ -1,4 +1,4 @@
-// Service worker de Salón Hermanos: recibe los avisos al teléfono (push) aunque la página esté
+// Service worker de Barbería Hermanos: recibe los avisos al teléfono (push) aunque la página esté
 // cerrada, y al tocarlos abre el panel (o el portal del barbero) en la sección del aviso. No guarda la
 // página en caché.
 
@@ -12,7 +12,7 @@ self.addEventListener('push', (event) => {
   } catch {
     data = { body: event.data ? event.data.text() : '' };
   }
-  const title = data.title || '💈 Salón Hermanos';
+  const title = data.title || '💈 Barbería Hermanos';
   event.waitUntil(
     self.registration.showNotification(title, {
       body: data.body || 'Tienes una novedad en el panel.',

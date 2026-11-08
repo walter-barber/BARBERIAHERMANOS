@@ -82,7 +82,7 @@ export default function Services({ onBooking }: ServicesProps) {
         <div className="text-center mb-12">
           <p className="section-label mb-3">Servicios y precios</p>
           <h2 className="font-serif text-4xl sm:text-5xl font-extrabold text-ivory mb-4">
-            La carta del <span className="font-script font-normal text-gold">Salón</span>
+            La carta de la <span className="font-script font-normal text-gold">Barbería</span>
           </h2>
           <p className="text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto">
             Toca cualquier servicio para reservarlo.{' '}

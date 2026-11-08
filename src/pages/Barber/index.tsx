@@ -757,7 +757,7 @@ function BarberDashboard({ barber, pin, onLogout, onPinChanged, onWorkHoursChang
 }
 
 export default function BarberPage() {
-  usePageMeta({ title: 'Portal del barbero | Salón Hermanos', noindex: true });
+  usePageMeta({ title: 'Portal del barbero | Barbería Hermanos', noindex: true });
   const [session, setSession] = useState<{ barber: Barber; pin: string } | null>(null);
 
   if (!session) {

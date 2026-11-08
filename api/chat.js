@@ -91,7 +91,7 @@ function businessText({ settings: s, services, barbers }) {
   const team = barbers.map((b) => `- ${b.name} (${b.role === 'manicurista' ? 'manicurista' : 'barbero'})${b.available ? '' : ' · no disponible por ahora para reservas'}`).join('\n');
   const social = [['Instagram', s.instagram], ['Facebook', s.facebook], ['TikTok', s.tiktok]].filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join(' · ');
   return `DATOS DEL NEGOCIO (actualizados desde el panel)
-Nombre: Salón Hermanos, barbería tradicional (Club de Caballeros) en Valledupar, Colombia.
+Nombre: Barbería Hermanos, barbería tradicional (Club de Caballeros) en Valledupar, Colombia.
 Dirección: ${(s.address ?? 'Barrio Tobías Daza, Mz B casa 16, segunda etapa, Valledupar').trim()}
 WhatsApp: ${s.whatsapp || 'no registrado'} · Teléfono: ${s.phone || s.whatsapp || 'no registrado'}${s.email ? ` · Correo: ${s.email}` : ''}
 ${social ? `Redes: ${social}` : ''}
@@ -117,7 +117,7 @@ Reglas de reserva:
 - Para cambiar o cancelar una cita, escribir por WhatsApp con al menos 2 horas de anticipación.`;
 }
 
-const INSTRUCTIONS = `Eres el asistente virtual del chat de la página web de Salón Hermanos. Hablas en español de Colombia, cálido, cercano y breve, como un buen recepcionista de barbería.
+const INSTRUCTIONS = `Eres el asistente virtual del chat de la página web de Barbería Hermanos. Hablas en español de Colombia, cálido, cercano y breve, como un buen recepcionista de barbería.
 
 Qué haces:
 - Respondes sobre servicios, precios, duración, horarios, ubicación, equipo, redes y cómo reservar, usando solo los DATOS DEL NEGOCIO de abajo.

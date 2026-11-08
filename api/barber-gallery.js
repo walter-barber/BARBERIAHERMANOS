@@ -60,7 +60,7 @@ export default async function handler(req, res) {
       id,
       url,
       category,
-      alt: String(alt || `Trabajo de ${category.toLowerCase()} en Salón Hermanos`).slice(0, 160),
+      alt: String(alt || `Trabajo de ${category.toLowerCase()} en Barbería Hermanos`).slice(0, 160),
       barber_id: barberId,
     };
     const ins = await fetch(`${supabaseUrl}/rest/v1/gallery`, {

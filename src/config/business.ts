@@ -1,9 +1,9 @@
 import type { BusinessConfig } from '../types';
 
-// Datos de Salón Hermanos. Los que tienen «PENDIENTE» son provisionales: se cambian en
+// Datos de Barbería Hermanos. Los que tienen «PENDIENTE» son provisionales: se cambian en
 // Panel → Configuración (se guardan en la base de datos y reemplazan estos valores).
 export const businessConfig: BusinessConfig = {
-  name: 'Salón Hermanos',
+  name: 'Barbería Hermanos',
   tagline: 'Barbería tradicional · Club de Caballeros',
   address: 'Barrio Tobías Daza, Mz B casa 16, segunda etapa, Valledupar',
   // PENDIENTE: número de WhatsApp del negocio (con 57 adelante, sin espacios)

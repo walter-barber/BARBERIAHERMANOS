@@ -215,7 +215,7 @@ export async function ruleReply({ text: raw, biz, today, availability, hoursFor 
 
   if (intent.ubicacion) {
     const address = (s.address ?? 'Barrio Tobías Daza, Mz B casa 16, segunda etapa, Valledupar').trim();
-    parts.push(`Estamos en ${address}. 📍\nCómo llegar: https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`Salón Hermanos ${address}`)}`);
+    parts.push(`Estamos en ${address}. 📍\nCómo llegar: https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`Barbería Hermanos ${address}`)}`);
   }
   if (intent.contacto) parts.push(`Puedes escribirnos al WhatsApp ${s.whatsapp || 'de la barbería'}${s.phone && s.phone !== s.whatsapp ? ` o llamar al ${s.phone}` : ''}.`);
   if (intent.redes) {
@@ -240,9 +240,9 @@ export async function ruleReply({ text: raw, biz, today, availability, hoursFor 
     parts.push('Con gusto te comunico con la barbería. Toca "Dejar mensaje", escribe tu nombre y celular, y te responden por WhatsApp.');
     actions.push({ type: 'handoff' });
   }
-  if (!parts.length && intent.gracias) parts.push('¡Con mucho gusto! Te esperamos en Salón Hermanos. 💈');
+  if (!parts.length && intent.gracias) parts.push('¡Con mucho gusto! Te esperamos en Barbería Hermanos. 💈');
   if (!parts.length && intent.saludo) {
-    parts.push('¡Hola! 👋 Bienvenido a Salón Hermanos. Puedo decirte precios, horarios, cómo llegar o qué horas hay libres. ¿Qué necesitas?');
+    parts.push('¡Hola! 👋 Bienvenido a Barbería Hermanos. Puedo decirte precios, horarios, cómo llegar o qué horas hay libres. ¿Qué necesitas?');
   }
   if (!parts.length) {
     parts.push('Esa pregunta no la sé responder todavía. 🙈 Puedo ayudarte con precios, horarios, ubicación o cupos. Si es otra cosa, toca "Dejar mensaje" y la barbería te responde por WhatsApp.');

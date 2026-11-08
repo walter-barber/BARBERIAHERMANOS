@@ -7,7 +7,7 @@ export default {
     extend: {
       // El diseño usa white/8 y white/12 (bordes suaves); sin esto Tailwind los ignora y el borde sale blanco
       opacity: { 8: '0.08', 12: '0.12' },
-      // Paleta del manual de identidad de Salón Hermanos
+      // Paleta del manual de identidad de Barbería Hermanos
       colors: {
         gold: {
           DEFAULT: '#D9AD50',

@@ -776,11 +776,11 @@ function QrTab() {
             <div className="p-4 bg-white rounded-2xl shadow-2xl mb-4 border-2 border-gold/40">
               <img
                 src="/qr-reservas.png"
-                alt="Código QR de Reservas Salón Hermanos"
+                alt="Código QR de Reservas Barbería Hermanos"
                 className="w-48 h-48 sm:w-56 sm:h-56 block object-contain"
               />
             </div>
-            <p className="font-serif font-bold text-white text-base">Salón Hermanos</p>
+            <p className="font-serif font-bold text-white text-base">Barbería Hermanos</p>
             <p className="text-zinc-400 text-xs mt-0.5">Escanea para elegir tu servicio y reservar</p>
             <span className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono text-emerald-300 bg-emerald-500/10 border border-emerald-500/25">
               <CheckCircle2 size={12} /> Alta resolución (1200×1200 px)
@@ -815,7 +815,7 @@ function QrTab() {
                 <QrCode size={16} /> ¿Cómo funciona este QR?
               </p>
               <p>
-                Al escanearlo con la cámara de cualquier teléfono móvil (iPhone o Android), abre de inmediato la ventana de <strong className="text-white">Reserva de Salón Hermanos</strong> con la lista de servicios en primer plano («¿Qué servicio te gustaría?»), para que el cliente escoja su corte o tratamiento de una y reserve su turno en 1 toque.
+                Al escanearlo con la cámara de cualquier teléfono móvil (iPhone o Android), abre de inmediato la ventana de <strong className="text-white">Reserva de Barbería Hermanos</strong> con la lista de servicios en primer plano («¿Qué servicio te gustaría?»), para que el cliente escoja su corte o tratamiento de una y reserve su turno en 1 toque.
               </p>
             </div>
 
@@ -835,7 +835,7 @@ function QrTab() {
 
                 <a
                   href="/qr-reservas.png"
-                  download="QR-Salon-Hermanos-Reservas.png"
+                  download="QR-Barberia-Hermanos-Reservas.png"
                   className="btn-dark-glass py-2.5 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 hover:border-gold/40 hover:text-white"
                 >
                   <Download size={15} />
@@ -846,7 +846,7 @@ function QrTab() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <a
                   href="/qr-reservas.svg"
-                  download="QR-Salon-Hermanos-Reservas.svg"
+                  download="QR-Barberia-Hermanos-Reservas.svg"
                   className="btn-dark-glass py-2.5 px-4 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 hover:border-gold/40 hover:text-white"
                 >
                   <Download size={15} />

@@ -465,8 +465,8 @@ function RescheduleModal({ booking, phone, name, onClose, onSuccess }: Reschedul
 // ==========================================
 export default function MyBookingsPage() {
   usePageMeta({
-    title: 'Mis citas | Salón Hermanos',
-    description: 'Consulta, reagenda o cancela tu cita en Salón Hermanos con tu número de celular.',
+    title: 'Mis citas | Barbería Hermanos',
+    description: 'Consulta, reagenda o cancela tu cita en Barbería Hermanos con tu número de celular.',
     noindex: true,
   });
 

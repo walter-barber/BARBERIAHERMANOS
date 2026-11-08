@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const publicDir = path.resolve(__dirname, '../public');
 
-// URL directa a la reserva de Salón Hermanos (abre de inmediato la elección de servicio)
+// URL directa a la reserva de Barbería Hermanos (abre de inmediato la elección de servicio)
 const BOOKING_URL = 'https://barberia-hermanos.vercel.app/reservar';
 
 async function main() {
@@ -52,7 +52,7 @@ async function main() {
     margin: 2,
     width: 1200,
     color: {
-      dark: '#D9AD50', // Dorado Salón Hermanos
+      dark: '#D9AD50', // Dorado Barbería Hermanos
       light: '#121214', // Fondo carbón oscuro
     },
   });
@@ -73,7 +73,7 @@ async function main() {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salón Hermanos · Cartel QR de Reservas</title>
+  <title>Barbería Hermanos · Cartel QR de Reservas</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@400;500;600;700&display=swap');
 
@@ -255,7 +255,7 @@ async function main() {
     <button class="btn" onclick="window.print()">
       🖨️ Imprimir Cartel / Guardar PDF
     </button>
-    <a href="/qr-reservas.png" download="QR-Salon-Hermanos.png" class="btn" style="background:#27272a; color:#f4f4f5; border:1px solid #3f3f46;">
+    <a href="/qr-reservas.png" download="QR-Barberia-Hermanos.png" class="btn" style="background:#27272a; color:#f4f4f5; border:1px solid #3f3f46;">
       📥 Descargar Imagen PNG
     </a>
   </div>
@@ -266,11 +266,11 @@ async function main() {
     <div class="corner-decor bottom-left"></div>
     <div class="corner-decor bottom-right"></div>
 
-    <div class="logo-badge">Salón Hermanos</div>
+    <div class="logo-badge">Barbería Hermanos</div>
     <div class="sub-badge">Club de Caballeros</div>
 
     <div class="qr-container">
-      <img src="${standardDataUrl}" alt="Código QR de Reservas Salón Hermanos">
+      <img src="${standardDataUrl}" alt="Código QR de Reservas Barbería Hermanos">
     </div>
 
     <h2 class="headline">Escanea y Reserva tu Cita</h2>

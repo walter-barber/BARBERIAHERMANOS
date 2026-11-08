@@ -162,7 +162,7 @@ export default function AdminInvoices() {
     try {
       const { default: ExcelJS } = await import('exceljs');
       const wb = new ExcelJS.Workbook();
-      wb.creator = 'Salón Hermanos';
+      wb.creator = 'Barbería Hermanos';
       wb.created = new Date();
 
       const ws = wb.addWorksheet('Facturas de Caja');
@@ -248,7 +248,7 @@ export default function AdminInvoices() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Facturas-Salon-Hermanos-${period === 'dia' ? day : `${period}-${today}`}.xlsx`;
+      a.download = `Facturas-Barberia-Hermanos-${period === 'dia' ? day : `${period}-${today}`}.xlsx`;
       a.click();
       URL.revokeObjectURL(url);
     } catch (err) {
@@ -272,7 +272,7 @@ export default function AdminInvoices() {
 💈 *Atendido por:* ${inv.barber?.name || inv.booking.barberName}
 💰 *Total pagado:* ${formatCOP(inv.booking.price)}
 
-¡Gracias por tu visita a Salón Hermanos - Club de Caballeros! Esperamos verte pronto.`;
+¡Gracias por tu visita a Barbería Hermanos - Club de Caballeros! Esperamos verte pronto.`;
     window.open(`https://wa.me/57${phone}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
@@ -839,7 +839,7 @@ export default function AdminInvoices() {
               <X size={16} />
             </button>
 
-            {/* Recibo formato Salón Hermanos */}
+            {/* Recibo formato Barbería Hermanos */}
             <div ref={printRef} className="space-y-5 text-white">
               {/* Encabezado del ticket */}
               <div className="text-center pb-4 border-b border-white/10">

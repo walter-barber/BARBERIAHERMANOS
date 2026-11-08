@@ -4,8 +4,8 @@ import Products from '../components/landing/Products';
 
 export default function ShopPage() {
   usePageMeta({
-    title: 'Productos para cabello y barba | Salón Hermanos Valledupar',
-    description: 'Productos de cuidado para cabello y barba. Pídelos por WhatsApp y recógelos en Salón Hermanos, Valledupar.',
+    title: 'Productos para cabello y barba | Barbería Hermanos Valledupar',
+    description: 'Productos de cuidado para cabello y barba. Pídelos por WhatsApp y recógelos en Barbería Hermanos, Valledupar.',
   });
   return (
     <PublicLayout>
