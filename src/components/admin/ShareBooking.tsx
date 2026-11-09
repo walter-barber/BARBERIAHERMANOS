@@ -39,7 +39,7 @@ export default function ShareBooking({ bookingUrl }: { bookingUrl: string }) {
     navigator.clipboard?.writeText(message).catch(() => undefined);
     try {
       await navigator.share({ files: [logo], text: message, title: 'Barbería Hermanos' });
-      setStatus({ ok: true, text: 'Si el mensaje no quedó junto a la imagen, pégalo: ya está copiado.' });
+      setStatus({ ok: true, text: 'Logo listo. Ahora toca «Paso 2» y escoge el mismo chat.' });
     } catch (err) {
       if (err instanceof DOMException && err.name === 'AbortError') return; // canceló
       console.error('No se pudo compartir', err);
@@ -81,9 +81,19 @@ export default function ShareBooking({ bookingUrl }: { bookingUrl: string }) {
         <div className="space-y-2.5">
           {canShare && (
             <button type="button" onClick={share} className="w-full min-h-[50px] rounded-full bg-emerald-500 hover:bg-emerald-400 text-white font-bold inline-flex items-center justify-center gap-2">
-              <Share2 size={18} /> Enviar con logo por WhatsApp
+              <Share2 size={18} /> Paso 1: enviar el logo
             </button>
           )}
+          {/* WhatsApp puede descartar el texto que llega con la imagen: el mensaje y el enlace van aparte, ya escritos */}
+          <a
+            href={`https://wa.me/?text=${encodeURIComponent(message)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full min-h-[50px] rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold inline-flex items-center justify-center gap-2 text-center px-4"
+          >
+            <MessageCircle size={18} /> {canShare ? 'Paso 2: enviar mensaje y enlace' : 'Enviar mensaje y enlace por WhatsApp'}
+          </a>
+          {canShare && <p className="text-xs text-zinc-400 text-center">Escoge el mismo chat en los dos pasos: primero llega el logo y debajo el mensaje con el enlace.</p>}
           <div className="grid grid-cols-2 gap-2">
             {canCopyLogo && (
               <button type="button" onClick={copyLogo} disabled={!logo} className="btn-dark-glass min-h-[44px] rounded-xl text-xs font-semibold inline-flex items-center justify-center gap-1.5 disabled:opacity-50">
