@@ -12,6 +12,7 @@ import { todayKey, addDays, formatDateLong } from '../../lib/dates';
 import { Panel, Segmented } from '../../components/admin/ui';
 import type { Barber, BusinessHours, SpecialDay } from '../../types';
 import PushCard from '../../components/admin/PushCard';
+import ShareBooking from '../../components/admin/ShareBooking';
 import BarberServicesSettings from '../../components/admin/BarberServicesSettings';
 
 // Configuración editable del negocio. Se guarda en la base de datos (tabla business_settings)
@@ -766,6 +767,7 @@ function QrTab() {
 
   return (
     <div className="space-y-6">
+      <ShareBooking bookingUrl={bookingUrl} />
       <Panel
         title="Código QR de Reservas y Servicios"
         subtitle="Escanea con el celular para abrir directamente la reserva y escoger el servicio al instante"
