@@ -767,7 +767,7 @@ function QrTab() {
 
   return (
     <div className="space-y-6">
-      <ShareBooking bookingUrl={bookingUrl} />
+      <ShareBooking />
       <Panel
         title="Código QR de Reservas y Servicios"
         subtitle="Escanea con el celular para abrir directamente la reserva y escoger el servicio al instante"
