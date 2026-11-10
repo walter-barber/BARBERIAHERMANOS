@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Hermanos Barberos</string>
-    <string name="title_activity_main">Hermanos Barberos</string>
+    <string name="app_name">Barbería Hermanos</string>
+    <string name="title_activity_main">Barbería Hermanos</string>
     <string name="package_name">co.barberiahermanos.barberos</string>
     <string name="custom_url_scheme">co.barberiahermanos.barberos</string>
 </resources>
