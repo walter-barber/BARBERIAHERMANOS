@@ -1,3 +1,4 @@
+import { IS_BARBER_APP } from '../../lib/appMode';
 import type { ReactNode } from 'react';
 import { ShieldCheck, ArrowLeft } from 'lucide-react';
 import ClubBackground from './ClubBackground';
@@ -43,7 +44,7 @@ export default function AuthLayout({ role, title, subtitle, children }: Props) {
           </div>
           <div>
 
-            <nav aria-label="Tipo de acceso" className="grid grid-cols-2 gap-1 p-1 rounded-2xl bg-white/[0.04] border border-white/10 mb-6">
+            {!IS_BARBER_APP && (<nav aria-label="Tipo de acceso" className="grid grid-cols-2 gap-1 p-1 rounded-2xl bg-white/[0.04] border border-white/10 mb-6">
               {ROLES.map(({ id, label, href, icon: Icon }) => (
                 <a
                   key={id}
@@ -57,7 +58,7 @@ export default function AuthLayout({ role, title, subtitle, children }: Props) {
                   {label}
                 </a>
               ))}
-            </nav>
+            </nav>)}
 
             <section className="rounded-3xl border border-white/12 bg-[#101010]/95 shadow-2xl p-7 sm:p-8">
               <h1 className="font-serif text-2xl font-bold text-white">{title}</h1>
@@ -65,9 +66,9 @@ export default function AuthLayout({ role, title, subtitle, children }: Props) {
               {children}
             </section>
 
-            <a href="/" className="flex items-center justify-center gap-2 mt-6 text-zinc-500 hover:text-gold text-sm transition-colors">
+            {!IS_BARBER_APP && (<a href="/" className="flex items-center justify-center gap-2 mt-6 text-zinc-500 hover:text-gold text-sm transition-colors">
               <ArrowLeft size={15} /> Volver al sitio
-            </a>
+            </a>)}
           </div>
         </main>
         <p className="mt-10 text-zinc-600 text-xs text-center">Acceso exclusivo para el equipo de {businessConfig.name}.</p>

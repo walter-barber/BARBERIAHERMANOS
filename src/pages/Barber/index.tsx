@@ -21,6 +21,7 @@ import NewClientModal from '../../components/admin/NewClientModal';
 import BarberHome from './BarberHome';
 import BarberWorks from './BarberWorks';
 import PushCard from '../../components/admin/PushCard';
+import AppDownloadCard from '../../components/common/AppDownloadCard';
 import { barberEarnings, bossName, isBarberOwner } from '../../lib/earnings';
 import { InvoiceList, splitTotals } from '../../components/admin/ServiceSplit';
 import AgendaBoard from '../../components/admin/AgendaBoard';
@@ -547,6 +548,7 @@ function ProfileTab({ barber, appts, pin, onPinChanged, onWorkHoursChanged, onNa
 
       <div className="lg:col-span-2">
         {!IS_BARBER_APP && <PushCard barber={{ id: barber.id, pin }} />}
+        {!IS_BARBER_APP && <div className="mt-4"><AppDownloadCard barber={{ id: barber.id, pin }} /></div>}
       </div>
 
       <div className="lg:col-span-2">
@@ -707,6 +709,7 @@ function BarberDashboard({ barber, pin, onLogout, onPinChanged, onWorkHoursChang
               <>
                 <div className="lg:hidden space-y-4">
                   {!IS_BARBER_APP && <PushCard compact barber={{ id: barber.id, pin }} />}
+                  {!IS_BARBER_APP && <AppDownloadCard barber={{ id: barber.id, pin }} />}
                   <BarberHome
                     barber={barber}
                     appts={appts}

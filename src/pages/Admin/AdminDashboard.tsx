@@ -20,6 +20,7 @@ import DataTable, { type Column } from '../../components/admin/DataTable';
 import TodayChairs from '../../components/admin/TodayChairs';
 import NewClientModal from '../../components/admin/NewClientModal';
 import PushCard from '../../components/admin/PushCard';
+import AppDownloadCard from '../../components/common/AppDownloadCard';
 import MobileHome from '../../components/admin/MobileHome';
 import {
   barberEarnings, isBarberOwner, getBarberOwnerKey, getOwnerBeneficiary,
@@ -167,6 +168,7 @@ export default function AdminDashboard({ onNavigate, onLogout }: { onNavigate?: 
   return (
     <div className="space-y-6 sm:space-y-8">
       <PushCard compact />
+      <AppDownloadCard />
       {/* Teléfono: inicio con botones grandes por secciones */}
       <MobileHome
         greeting={greeting(now)}

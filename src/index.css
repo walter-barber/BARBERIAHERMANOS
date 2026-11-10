@@ -843,3 +843,15 @@ html:not([data-theme='light']) select option:checked {
 .barber-app .sticky.top-0 {
   top: env(safe-area-inset-top, 0px);
 }
+/* En la app no se selecciona texto al mantener presionado (sí en los campos para escribir) */
+.barber-app body {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.barber-app input,
+.barber-app textarea,
+.barber-app [contenteditable='true'] {
+  -webkit-user-select: text;
+  user-select: text;
+}
