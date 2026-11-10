@@ -826,3 +826,20 @@ html:not([data-theme='light']) select option:checked {
   background-color: #3a2e14;
   color: #e6c27a;
 }
+
+/* App de los barberos: no tapar la barra de estado (hora, batería) ni la barra de abajo del teléfono */
+.barber-app body {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.barber-app body::before {
+  content: '';
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: env(safe-area-inset-top, 0px);
+  background: #111111;
+  z-index: 60;
+}
+.barber-app .sticky.top-0 {
+  top: env(safe-area-inset-top, 0px);
+}

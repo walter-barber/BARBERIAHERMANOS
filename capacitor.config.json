@@ -1,0 +1,10 @@
+{
+  "appId": "co.barberiahermanos.barberos",
+  "appName": "Hermanos Barberos",
+  "webDir": "dist-app",
+  "backgroundColor": "#111111",
+  "plugins": {
+    "StatusBar": { "style": "DARK", "backgroundColor": "#111111", "overlaysWebView": false },
+    "SystemBars": { "insetsHandling": "css", "style": "DARK" }
+  }
+}

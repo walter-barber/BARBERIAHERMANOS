@@ -27,6 +27,8 @@ import AgendaBoard from '../../components/admin/AgendaBoard';
 import { getAllServices } from '../../services/services';
 import { Panel, KpiCard, StatusBadge, Initials, EmptyState } from '../../components/admin/ui';
 import { GoldBarChart } from '../../components/admin/charts';
+import { getBarbers } from '../../services/barbers';
+import { IS_BARBER_APP, APP_KEY, savedBarberId, saveBarberId } from '../../lib/appMode';
 
 // Portal del barbero: su agenda, lo que gana, su historial y su perfil.
 // Cada consulta al servidor va con el PIN, que se valida allá.
@@ -523,6 +525,7 @@ function ProfileTab({ barber, appts, pin, onPinChanged, onWorkHoursChanged, onNa
         </div>
       </div>
 
+      {!IS_BARBER_APP && (
       <Panel title="Cambiar mi PIN" subtitle="El PIN de 4 números con el que entras a este portal">
         <div className="space-y-4">
           {pinInput('PIN actual', 'current', 'current-password')}
@@ -540,9 +543,10 @@ function ProfileTab({ barber, appts, pin, onPinChanged, onWorkHoursChanged, onNa
           </button>
         </div>
       </Panel>
+      )}
 
       <div className="lg:col-span-2">
-        <PushCard barber={{ id: barber.id, pin }} />
+        {!IS_BARBER_APP && <PushCard barber={{ id: barber.id, pin }} />}
       </div>
 
       <div className="lg:col-span-2">
@@ -702,7 +706,7 @@ function BarberDashboard({ barber, pin, onLogout, onPinChanged, onWorkHoursChang
             {tab === 'inicio' && (
               <>
                 <div className="lg:hidden space-y-4">
-                  <PushCard compact barber={{ id: barber.id, pin }} />
+                  {!IS_BARBER_APP && <PushCard compact barber={{ id: barber.id, pin }} />}
                   <BarberHome
                     barber={barber}
                     appts={appts}
@@ -759,16 +763,38 @@ function BarberDashboard({ barber, pin, onLogout, onPinChanged, onWorkHoursChang
 export default function BarberPage() {
   usePageMeta({ title: 'Portal del barbero | Barbería Hermanos', noindex: true });
   const [session, setSession] = useState<{ barber: Barber; pin: string } | null>(null);
+  // App: si el barbero ya había entrado en este teléfono, va directo a su perfil
+  const [restoring, setRestoring] = useState(() => IS_BARBER_APP && !!savedBarberId());
+  useEffect(() => {
+    if (!restoring) return;
+    const id = savedBarberId();
+    getBarbers()
+      .then((list) => {
+        const barber = list.find((b) => b.id === id);
+        if (barber) setSession({ barber, pin: APP_KEY });
+        else saveBarberId(null);
+      })
+      .catch((err) => console.error('No se pudo abrir el perfil guardado', err))
+      .finally(() => setRestoring(false));
+  }, [restoring]);
+
+  if (restoring) {
+    return (
+      <div className="min-h-screen bg-dark flex items-center justify-center">
+        <Loader2 size={28} className="animate-spin text-gold" />
+      </div>
+    );
+  }
 
   if (!session) {
-    return <BarberLogin onLogin={(barber, pin) => setSession({ barber, pin })} />;
+    return <BarberLogin onLogin={(barber, pin) => { if (IS_BARBER_APP) saveBarberId(barber.id); setSession({ barber, pin }); }} />;
   }
 
   return (
     <BarberDashboard
       barber={session.barber}
       pin={session.pin}
-      onLogout={() => setSession(null)}
+      onLogout={() => { saveBarberId(null); setSession(null); }}
       onPinChanged={(pin) => setSession({ ...session, pin })}
       onWorkHoursChanged={(workHours) => setSession({ ...session, barber: { ...session.barber, workHours } })}
     />

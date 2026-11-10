@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import './light-theme.css';
 import { loadSettings } from './services/settings';
+import { setupAppShell } from './lib/appShell';
+
+setupAppShell();
 
 // Primero se lee la configuración guardada desde el panel (horarios, días especiales, redes)
 // y luego se carga la web, para que todo muestre los datos actualizados desde el inicio.

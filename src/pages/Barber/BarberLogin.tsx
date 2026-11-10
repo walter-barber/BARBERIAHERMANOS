@@ -5,6 +5,7 @@ import { getBarbers } from '../../services/barbers';
 import { barberLogin } from '../../services/barberPortal';
 import type { Barber } from '../../types';
 import BarberAvatar from '../../components/common/BarberAvatar';
+import { IS_BARBER_APP, APP_KEY } from '../../lib/appMode';
 
 interface Props {
   onLogin: (barber: Barber, pin: string) => void;
@@ -57,6 +58,23 @@ export default function BarberLogin({ onLogin }: Props) {
     }
   };
 
+  // App de los barberos: entra con la llave de la app, sin PIN
+  const [appError, setAppError] = useState('');
+  const enterWithApp = async (barber: Barber) => {
+    setChecking(true);
+    setAppError('');
+    try {
+      const result = await barberLogin(barber.id, APP_KEY);
+      if (result === 'OK') onLogin(barber, APP_KEY);
+      else setAppError('Esta app todavía no tiene acceso. Avísale al administrador.');
+    } catch (err) {
+      console.error('No se pudo entrar desde la app', err);
+      setAppError('Sin conexión. Revisa el internet e intenta de nuevo.');
+    } finally {
+      setChecking(false);
+    }
+  };
+
   const handleDigit = useCallback((d: string) => {
     if (!selectedBarber || checking || shake) return;
     setPin((current) => {
@@ -84,7 +102,7 @@ export default function BarberLogin({ onLogin }: Props) {
 
   if (!selectedBarber) {
     return (
-      <AuthLayout role="barber" title="Portal del barbero" subtitle="Elige tu perfil para ver tu agenda del día.">
+      <AuthLayout role="barber" title="Portal del barbero" subtitle={IS_BARBER_APP ? 'Toca tu perfil para entrar. La app te recuerda la próxima vez.' : 'Elige tu perfil para ver tu agenda del día.'}>
         {loadingBarbers ? (
           <div className="flex flex-col items-center justify-center py-12 gap-3">
             <Loader2 size={26} className="animate-spin text-gold" />
@@ -96,10 +114,17 @@ export default function BarberLogin({ onLogin }: Props) {
           </p>
         ) : (
           <div className="space-y-3">
+            {appError && (
+              <p role="alert" className="flex items-start gap-2 text-red-300 text-sm bg-red-500/10 border border-red-500/25 rounded-xl px-3.5 py-2.5">
+                <AlertCircle size={16} className="shrink-0 mt-0.5" /> {appError}
+              </p>
+            )}
+            {checking && <p role="status" className="flex items-center justify-center gap-2 text-zinc-400 text-sm"><Loader2 size={16} className="animate-spin text-gold" /> Entrando...</p>}
             {barbers.map((b) => (
               <button
                 key={b.id}
-                onClick={() => setSelectedBarber(b)}
+                onClick={() => (IS_BARBER_APP ? enterWithApp(b) : setSelectedBarber(b))}
+                disabled={checking}
                 className="w-full p-4 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-gold/50 hover:bg-gold/[0.05] transition-all text-left flex items-center gap-4 group"
               >
                 <BarberAvatar barber={b} className="w-14 h-14 rounded-full text-lg shrink-0 border-2 border-gold/30 group-hover:border-gold transition-colors" />

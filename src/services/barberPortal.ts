@@ -5,6 +5,7 @@ import { isSupportedImage } from '../lib/imageFile';
 import { rowToBooking } from './bookings';
 import { syncAutoStatusToDb } from '../lib/autoStatus';
 import type { Booking } from '../types';
+import { apiUrl } from '../lib/appMode';
 
 // Portal del barbero: el PIN se valida en el servidor en cada llamada.
 // Tras 5 intentos fallidos el barbero queda bloqueado 15 minutos.
@@ -79,7 +80,7 @@ export async function uploadBarberWork(barberId: string, pin: string, file: File
     reader.onerror = () => reject(reader.error);
     reader.readAsDataURL(blob);
   });
-  const response = await fetch('/api/barber-gallery', {
+  const response = await fetch(apiUrl('/api/barber-gallery'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ action: 'upload', barberId, pin, image, category }),
@@ -90,7 +91,7 @@ export async function uploadBarberWork(barberId: string, pin: string, file: File
 
 /** El barbero quita de la Galería una foto suya. */
 export async function deleteBarberWork(barberId: string, pin: string, id: string): Promise<void> {
-  const response = await fetch('/api/barber-gallery', {
+  const response = await fetch(apiUrl('/api/barber-gallery'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ action: 'delete', barberId, pin, id }),

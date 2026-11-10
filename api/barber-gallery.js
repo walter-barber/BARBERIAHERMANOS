@@ -12,10 +12,22 @@
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const CATEGORIES = ['Cortes', 'Degradado', 'Barba', 'Cejas', 'Niños', 'Damas', 'Keratina', 'El salón'];
 const MAX_BYTES = 3 * 1024 * 1024;
+// PIN de 4 números (web) o la llave de la app de los barberos («app:…»)
+const PIN_RE = /^(\d{4}|app:[A-Za-z0-9_-]{20,100})$/;
+// La app de los barberos (Android: https://localhost, iPhone: capacitor://localhost) llama desde otro origen
+const APP_ORIGINS = ['https://localhost', 'capacitor://localhost'];
 
 export const config = { api: { bodyParser: { sizeLimit: '5mb' } } };
 
 export default async function handler(req, res) {
+  const origin = req.headers.origin;
+  if (APP_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
+  if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   const supabaseUrl = process.env.APP_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
   const serviceKey = process.env.APP_SUPABASE_SERVICE_ROLE_KEY;
@@ -23,7 +35,7 @@ export default async function handler(req, res) {
 
   const headers = { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` };
   const { action, barberId, pin } = req.body ?? {};
-  if (typeof barberId !== 'string' || !UUID_RE.test(barberId) || typeof pin !== 'string' || !/^\d{4}$/.test(pin)) {
+  if (typeof barberId !== 'string' || !UUID_RE.test(barberId) || typeof pin !== 'string' || !PIN_RE.test(pin)) {
     return res.status(400).json({ error: 'INVALID' });
   }
 

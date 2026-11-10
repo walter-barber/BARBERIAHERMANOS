@@ -4,6 +4,7 @@ import GalleryPage from './pages/GalleryPage';
 import ShopPage from './pages/ShopPage';
 import MyBookingsPage from './pages/MyBookingsPage';
 import { startSettingsSync, SETTINGS_EVENT } from './services/settings';
+import { IS_BARBER_APP } from './lib/appMode';
 
 // El panel y el portal del barbero (con gráficas y PDF) se descargan solo al abrirlos,
 // así la página pública carga rápido para los clientes.
@@ -25,6 +26,8 @@ const ROUTE_PATHS: Record<Route, string> = {
 };
 
 function getRoute(): Route {
+  // La app de los barberos solo tiene el portal del barbero
+  if (IS_BARBER_APP) return 'barber';
   const path = window.location.pathname;
   if (path.startsWith('/admin')) return 'admin';
   if (path.startsWith('/barber')) return 'barber';
@@ -54,7 +57,7 @@ export default function App() {
 
   useEffect(() => {
     const expected = ROUTE_PATHS[route];
-    if (window.location.pathname !== expected) {
+    if (!IS_BARBER_APP && window.location.pathname !== expected) {
       window.history.pushState(null, '', expected + window.location.hash);
     }
   }, [route]);
