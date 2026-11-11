@@ -75,7 +75,7 @@ export async function sendAppPush(endpoint, payload) {
           android: {
             priority: 'HIGH',
             ttl: '3600s',
-            notification: { channel_id: 'citas', sound: 'default', tag: payload.tag || undefined, default_vibrate_timings: true },
+            notification: { channel_id: 'citas_maquina', sound: 'maquina', tag: payload.tag || undefined, default_vibrate_timings: true },
           },
         },
       }),

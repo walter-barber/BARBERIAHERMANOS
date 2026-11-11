@@ -42,15 +42,18 @@ async function subscribe(barberId: string, pin: string, token: string) {
 export async function enableAppPush(barberId: string, pin: string): Promise<AppPushState> {
   if (!appPushAvailable()) return 'unavailable';
 
-  // Canal «Citas nuevas»: con sonido y que aparezca arriba en la pantalla
+  // Canal «Citas nuevas»: sonido de máquina de motilar (res/raw/maquina.wav) y aparece arriba en la pantalla.
+  // Android no deja cambiar el sonido de un canal ya creado: por eso es un canal nuevo y se borra el viejo.
   await PushNotifications.createChannel({
-    id: 'citas',
+    id: 'citas_maquina',
     name: 'Citas nuevas',
-    description: 'Cuando te agendan una cita',
+    description: 'Cuando te agendan una cita (suena la máquina)',
     importance: 5,
     visibility: 1,
     vibration: true,
+    sound: 'maquina.wav',
   }).catch(() => undefined);
+  await PushNotifications.deleteChannel({ id: 'citas' }).catch(() => undefined);
 
   let perm = await PushNotifications.checkPermissions();
   if (perm.receive === 'prompt' || perm.receive === 'prompt-with-rationale') perm = await PushNotifications.requestPermissions();
