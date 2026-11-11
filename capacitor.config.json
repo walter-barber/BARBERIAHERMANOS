@@ -4,7 +4,27 @@
   "webDir": "dist-app",
   "backgroundColor": "#111111",
   "plugins": {
-    "StatusBar": { "style": "DARK", "backgroundColor": "#111111", "overlaysWebView": false },
-    "SystemBars": { "insetsHandling": "css", "style": "DARK" }
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#111111",
+      "overlaysWebView": false
+    },
+    "SystemBars": {
+      "insetsHandling": "css",
+      "style": "DARK"
+    },
+    "CapacitorUpdater": {
+      "autoUpdate": false,
+      "appReadyTimeout": 15000,
+      "autoDeleteFailed": true,
+      "autoDeletePrevious": true
+    },
+    "PushNotifications": {
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
+    }
   }
 }

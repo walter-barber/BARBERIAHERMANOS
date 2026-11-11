@@ -17,6 +17,10 @@
 //   VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT (mailto:…)
 
 import webpush from 'web-push';
+import { sendAppPush, isAppSubscription } from './_fcm.js';
+
+// La app de los barberos (Android: https://localhost, iPhone: capacitor://localhost) también llama aquí
+const APP_ORIGINS = ['https://localhost', 'capacitor://localhost'];
 
 const MAX_AGE_MS = 15 * 60 * 1000;
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -38,6 +42,14 @@ const shortDate = (key) => {
 const cop = (n) => `$${Number(n).toLocaleString('es-CO')}`;
 
 export default async function handler(req, res) {
+  const origin = req.headers.origin;
+  if (APP_ORIGINS.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
+  if (req.method === 'OPTIONS') return res.status(204).end();
   const publicKey = process.env.VAPID_PUBLIC_KEY;
   const privateKey = process.env.VAPID_PRIVATE_KEY;
   const subject = process.env.VAPID_SUBJECT || 'mailto:admin@example.com';
@@ -67,6 +79,13 @@ export default async function handler(req, res) {
     const subs = r.ok ? await r.json() : [];
     let sent = 0;
     await Promise.all(subs.map(async (s) => {
+      // Teléfono con la app de los barberos: va por Firebase
+      if (isAppSubscription(s)) {
+        const result = await sendAppPush(s.endpoint, payload);
+        if (result === 'ok') sent += 1;
+        else if (result === 'gone') await db(`${table}?endpoint=eq.${encodeURIComponent(s.endpoint)}`, { method: 'DELETE' });
+        return;
+      }
       try {
         await webpush.sendNotification({ endpoint: s.endpoint, keys: { p256dh: s.p256dh, auth: s.auth } }, JSON.stringify(payload), { TTL: 3600, urgency: 'high' });
         sent += 1;

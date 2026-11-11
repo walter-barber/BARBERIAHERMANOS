@@ -1,4 +1,5 @@
 import { supabase } from '../lib/supabase';
+import { apiUrl } from '../lib/appMode';
 
 // Avisos al teléfono (notificaciones push de la web). El administrador los activa en cada teléfono
 // desde el panel; api/notify-push.js los envía cuando alguien reserva o manda un comprobante.
@@ -52,7 +53,7 @@ export async function enablePush(barber?: PushBarber): Promise<PushSubscription>
   if (permission !== 'granted') throw new Error('PERMISSION_DENIED');
   const reg = await registration();
   await navigator.serviceWorker.ready;
-  const response = await fetch('/api/notify-push');
+  const response = await fetch(apiUrl('/api/notify-push'));
   if (!response.ok) throw new Error('NOT_CONFIGURED');
   const { publicKey } = (await response.json()) as { publicKey: string };
   const subscription = (await reg.pushManager.getSubscription())
@@ -92,7 +93,7 @@ export async function disablePush(barber?: PushBarber): Promise<void> {
 
 /** Aviso de prueba a este teléfono. */
 export async function sendTestPush(subscription: PushSubscription, barber = false): Promise<void> {
-  const response = await fetch('/api/notify-push', {
+  const response = await fetch(apiUrl('/api/notify-push'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ event: 'test', endpoint: subscription.endpoint, barber }),
@@ -119,7 +120,7 @@ export async function countPushDevices(): Promise<number> {
  * decide a quién y cada cita se avisa una sola vez, así que se puede llamar después de cualquier cambio.
  */
 export function notifyBarbers(): void {
-  fetch('/api/notify-push', {
+  fetch(apiUrl('/api/notify-push'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ event: 'barber' }),
@@ -129,7 +130,7 @@ export function notifyBarbers(): void {
 
 /** Desde la web pública: avisa al administrador de una reserva nueva o de un comprobante enviado. */
 export function notifyPush(event: 'booking' | 'deposit', bookingIds: string[]): void {
-  fetch('/api/notify-push', {
+  fetch(apiUrl('/api/notify-push'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ event, bookingIds }),

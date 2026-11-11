@@ -30,6 +30,9 @@ import { Panel, KpiCard, StatusBadge, Initials, EmptyState } from '../../compone
 import { GoldBarChart } from '../../components/admin/charts';
 import { getBarbers } from '../../services/barbers';
 import { IS_BARBER_APP, APP_KEY, savedBarberId, saveBarberId } from '../../lib/appMode';
+import { appPushAvailable, enableAppPush, disableAppPush, type AppPushState } from '../../lib/appPush';
+import { startAppUpdater } from '../../lib/appUpdater';
+import AppNotices, { AppPushStatus } from '../../components/common/AppNotices';
 
 // Portal del barbero: su agenda, lo que gana, su historial y su perfil.
 // Cada consulta al servidor va con el PIN, que se valida allá.
@@ -441,7 +444,7 @@ function WorkHoursPanel({ barber, pin, onSaved }: { barber: Barber; pin: string;
   );
 }
 
-function ProfileTab({ barber, appts, pin, onPinChanged, onWorkHoursChanged, onNavigate }: { barber: Barber; appts: Booking[]; pin: string; onPinChanged: (pin: string) => void; onWorkHoursChanged: (hours: WorkHours) => void; onNavigate?: (tab: BarberTab) => void }) {
+function ProfileTab({ barber, appts, pin, onPinChanged, onWorkHoursChanged, onNavigate, push = null }: { push?: AppPushState | null; barber: Barber; appts: Booking[]; pin: string; onPinChanged: (pin: string) => void; onWorkHoursChanged: (hours: WorkHours) => void; onNavigate?: (tab: BarberTab) => void }) {
   const month = todayKey().slice(0, 7);
   const doneMonth = appts.filter((b) => b.status === 'completed' && b.date.startsWith(month));
   const revenue = doneMonth.reduce((s, b) => s + b.price, 0);
@@ -548,6 +551,7 @@ function ProfileTab({ barber, appts, pin, onPinChanged, onWorkHoursChanged, onNa
 
       <div className="lg:col-span-2">
         {!IS_BARBER_APP && <PushCard barber={{ id: barber.id, pin }} />}
+        {IS_BARBER_APP && <AppPushStatus push={push} />}
         {!IS_BARBER_APP && <div className="mt-4"><AppDownloadCard barber={{ id: barber.id, pin }} /></div>}
       </div>
 
@@ -615,6 +619,13 @@ function BarberDashboard({ barber, pin, onLogout, onPinChanged, onWorkHoursChang
     getBarberBookings(barber.id, pin)
       .then((list) => { setAppts(list); setError(''); setLoaded(true); })
       .catch((err) => handlePortalError(err, 'No se pudieron cargar tus citas. Se reintentará automáticamente.'));
+  }, [barber.id, pin]);
+
+  // App: los avisos de citas se activan solos al entrar al perfil (Android pide «Permitir» una vez)
+  const [push, setPush] = useState<AppPushState | null>(null);
+  useEffect(() => {
+    if (!appPushAvailable()) return;
+    enableAppPush(barber.id, pin).then(setPush).catch((err) => console.error('No se pudieron activar los avisos', err));
   }, [barber.id, pin]);
 
   const updateStatus = async (id: string, status: Booking['status']) => {
@@ -698,6 +709,7 @@ function BarberDashboard({ barber, pin, onLogout, onPinChanged, onWorkHoursChang
             <button onClick={() => setShiftNotice('')} className="text-amber-200/70 hover:text-amber-100 text-xs shrink-0">Cerrar</button>
           </div>
         )}
+        {IS_BARBER_APP && <AppNotices push={push} />}
         {!loaded ? (
           <div className="flex flex-col items-center justify-center py-24 gap-3">
             <Loader2 size={26} className="animate-spin text-gold" />
@@ -729,7 +741,7 @@ function BarberDashboard({ barber, pin, onLogout, onPinChanged, onWorkHoursChang
             {tab === 'trabajos' && <BarberWorks barber={barber} pin={pin} />}
             {tab === 'ganancias' && <EarningsTab appts={appts} barber={barber} />}
             {tab === 'historial' && <HistoryTab appts={appts} />}
-            {tab === 'perfil' && <ProfileTab barber={barber} appts={appts} pin={pin} onPinChanged={onPinChanged} onWorkHoursChanged={onWorkHoursChanged} onNavigate={setTab} />}
+            {tab === 'perfil' && <ProfileTab barber={barber} appts={appts} pin={pin} onPinChanged={onPinChanged} onWorkHoursChanged={onWorkHoursChanged} onNavigate={setTab} push={push} />}
           </>
         )}
       </main>
@@ -768,6 +780,8 @@ export default function BarberPage() {
   const [session, setSession] = useState<{ barber: Barber; pin: string } | null>(null);
   // App: si el barbero ya había entrado en este teléfono, va directo a su perfil
   const [restoring, setRestoring] = useState(() => IS_BARBER_APP && !!savedBarberId());
+  // App: confirma que esta versión arrancó bien y busca actualizaciones
+  useEffect(() => { startAppUpdater(savedBarberId); }, []);
   useEffect(() => {
     if (!restoring) return;
     const id = savedBarberId();
@@ -797,7 +811,11 @@ export default function BarberPage() {
     <BarberDashboard
       barber={session.barber}
       pin={session.pin}
-      onLogout={() => { saveBarberId(null); setSession(null); }}
+      onLogout={() => {
+        if (IS_BARBER_APP) disableAppPush(session.barber.id, session.pin).catch(() => undefined);
+        saveBarberId(null);
+        setSession(null);
+      }}
       onPinChanged={(pin) => setSession({ ...session, pin })}
       onWorkHoursChanged={(workHours) => setSession({ ...session, barber: { ...session.barber, workHours } })}
     />

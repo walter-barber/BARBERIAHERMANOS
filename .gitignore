@@ -17,3 +17,8 @@ datos-privados/
 
 # App móvil de los barberos (Capacitor)
 dist-app/
+
+# Firebase (avisos al teléfono): nunca al repositorio público
+google-services.json
+firebase-admin*.json
+*firebase-adminsdk*.json

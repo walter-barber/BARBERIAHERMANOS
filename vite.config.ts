@@ -49,5 +49,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react(), seoFiles(siteUrl)],
+    // Versión de las pantallas de la app de los barberos (la pone npm run app:publicar; si no, la hora)
+    define: { __APP_WEB_VERSION__: JSON.stringify(process.env.APP_WEB_VERSION || new Date().toISOString().replace(/\D/g, '').slice(0, 12)) },
   };
 });
